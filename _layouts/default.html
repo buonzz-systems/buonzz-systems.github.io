@@ -1,20 +1,136 @@
-<!DOCTYPE html>
-<html>
+<% include "header" %>
+  <body class="homepage">
 
-  {% include head.html %}
+    <!-- Header -->
+      <div id="header-wrapper">       
+        <% include "menu" %>
+        <!-- Hero -->
+          <section id="hero" class="container">
+            <header>
+              <h2>Open-Source and High Quality PHP Web Applications</h2>
+            </header>
+            <p>PHP Libraries and Applications designed and built using the latest and state-of-the-art tools and methodologies.</p>
+            <ul class="actions">
+              <li><a target="_blank" href="https://github.com/buonzz" class="button">View Our Projects</a></li>
+            </ul>
+          </section>
 
-  <body>
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
       </div>
-    </div>
 
-    {% include footer.html %}
+    <!-- Features 1 -->
+      <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <section class="6u feature">
+              <div class="image-wrapper first">
+                <a href="http://getcomposer.org" class="image featured first"><img src="images/Dependency-Management-Tool-For-PHP-Composer.jpg" alt="" /></a>
+              </div>
+              <header>
+                <h2>Composer Powered!<br />
+                Framework Agnostic Libraries</h2>
+              </header>
+              <p>We strive to make each of our libraries usable for widest possible audience 
+                by building our libraries as standard Composer Libraries. Meaning, you just need to specifiy it as a dependency in your composer.json and you should be good to go!</p>
+              <ul class="actions">
+                <li><a href="http://getcomposer.org" target="_blank" class="button">What is Composer?</a></li>
+              </ul>
+            </section>
+            <section class="6u feature">
+              <div class="image-wrapper">
+                <a href="http://www.php-fig.org/" class="image featured"><img src="images/PHP-FIG.png" alt="" /></a>
+              </div>
+              <header>
+                <h2>PSR Standards Compliant<br/>
+                  www.php-fig.org</h2>
+              </header>
+              <p>Our scripts is not build on rush, we take our time to build the most standard compliant structure. 
+                We don't take chances when it comes to formulating conventions, instead we adapt the community standards and religiously follow them.</p>
+              <ul class="actions">
+                <li><a href="http://www.php-fig.org/" target="_blank" class="button">What are PSR standards?</a></li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+      
+    <!-- Promo -->
+      <div id="promo-wrapper">
+        <section id="promo">
+          <h2>We develop our projects for free for everyone's use. Do you mind buying us a coffee? :)</h2>
+          <a href="https://flattr.com/submit/auto?user_id=darwin.biler&url=http%3A%2F%2Fwww.buonzz.com%2F" class="button">Donate</a>
+        </section>
+      </div>
+      
+    <!-- Features 2 -->
+      <div class="wrapper">
+        <section class="container">
+          <header class="major">
+            <h2>Being not tied to any corporate restrictions, we are able to re-invent and experiment with best tools and frameworks.</h2>
+            <p>The following are the frameworks/tools we currently use:</p>
+          </header>
+          <div class="row features">
+            <section class="4u feature">
+              <div class="image-wrapper first">
+                <a href="http://laravel.com" class="image featured"><img src="images/laravel-logo-big-570x398.png" alt="" /></a>
+              </div>
+              <p>Laravel</p>
+            </section>
+            <section class="4u feature">
+              <div class="image-wrapper">
+                <a href="http://github.com" class="image featured"><img src="images/github.png" alt="" /></a>
+              </div>
+              <p>GitHub</p>
+            </section>
+            <section class="4u feature">
+              <div class="image-wrapper">
+                <a href="http://behat.org" class="image featured"><img src="images/behat-11.jpg" alt="" /></a>
+              </div>
+              <p>Behat</p>
+            </section>
+          </div>
+          <ul class="actions major">
+            <li><a href="#" class="button">See more tools and frameworks we use</a></li>
+          </ul>
+        </section>
+      </div>
 
-  </body>
-
-</html>
+    <!-- Footer -->
+      <div id="footer-wrapper">
+        <a name="footer-wrapper"></a>
+        <div id="footer" class="container">
+          <header class="major">
+            <h2>Say Hello to us!</h2>
+            <p>If you have any idea, project or any concern, feel free to contact us!</p>
+          </header>
+          <div class="row">
+            <section class="6u">
+              <form  method="post" action="message_sent.php">
+                <div class="row half">
+                  <div class="6u">
+                    <input name="name" placeholder="Name" type="text" />
+                  </div>
+                  <div class="6u">
+                    <input name="email" placeholder="Email" type="text" />
+                  </div>
+                </div>
+                <div class="row half">
+                  <div class="12u">
+                    <textarea name="message" placeholder="Message"></textarea>
+                  </div>
+                </div>
+                <div class="row half">
+                  <div class="12u">
+                    <ul class="actions">
+                      <li><input type="submit" value="Send Message" /></li>
+                      <li><input type="reset" value="Clear form" /></li>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+            </section>
+            <section class="6u">
+              <% include "social" %>
+            </section>
+          </div>
+        </div>
+<% include "footer" %>        

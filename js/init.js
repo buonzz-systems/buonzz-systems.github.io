@@ -9,12 +9,12 @@
 	skel.init({
 		reset: 'full',
 		breakpoints: {
-			'global': { range: '*', href: 'css/style.css', containers: 1200, grid: { gutters: 50 } },
-			'normal': { range: '-1280', href: 'css/style-normal.css', containers: 960, grid: { gutters: 40 } },
-			'narrow': { range: '-1080', href: 'css/style-narrow.css', containers: '100%' },
-			'narrower': { range: '-820', href: 'css/style-narrower.css', lockViewport: true, grid: { gutters: 30, collapse: 1 } },
-			'mobile': { range: '-640', href: 'css/style-mobile.css', grid: { collapse: 2 } },
-			'mobilep': { range: '-480', href: 'css/style-mobilep.css', grid: { gutters: 15 } }
+			'global': { range: '*', href: 'http://www.buonzz.com/css/style.css', containers: 1200, grid: { gutters: 50 } },
+			'normal': { range: '-1280', href: 'http://www.buonzz.com/css/style-normal.css', containers: 960, grid: { gutters: 40 } },
+			'narrow': { range: '-1080', href: 'http://www.buonzz.com/css/style-narrow.css', containers: '100%' },
+			'narrower': { range: '-820', href: 'http://www.buonzz.com/css/style-narrower.css', lockViewport: true, grid: { gutters: 30, collapse: 1 } },
+			'mobile': { range: '-640', href: 'http://www.buonzz.com/css/style-mobile.css', grid: { collapse: 2 } },
+			'mobilep': { range: '-480', href: 'http://www.buonzz.com/css/style-mobilep.css', grid: { gutters: 15 } }
 		}
 	}, {
 		layers: {

@@ -39,38 +39,31 @@ title: BAMP - A lightweight LAMP Stack for Vagrant
 				<article id="content">
 					<header>
 						<h2>Overview</h2>
-						<p>The easiest way to build a RESTful JSON API using PHP.</p>
+						<p>Spin a quick LAMP stack in no time using BAMP basebox for Vagrant.</p>
 					</header>
 					<h3>Features</h3>
 					<ul>
-						<li>Develop reusable Microservices.</li>
-						<li>Built with Domain Driven Design style</li>
-						<li>HATEOAS compliant</li>
-						<li>NoSQL enabled for BigData capability</li>
+						<li>Nginx, PHP 5.4, MySQL, MongoDB, Beanstalkd, Supervisor</li>
+						<li>Memcache/Memcached Enabled</li>
+						<li>PHPMyAdmin</li>
+						<li>RockMongo</li>
+						<li>Beanstalk Console</li>
 					</ul>
-					<a href="#" class="image featured"><img src="{{ site.url }}/images/CleanArchitecture-c7e91709b3072cd9db429a6d2a811703.jpg" alt="clean architecture" /></a>
-					<p>Ut sed tortor luctus, gravida nibh eget, volutpat odio. Proin rhoncus, sapien
-					mollis luctus hendrerit, orci dui viverra metus, et cursus nulla mi sed elit. Vestibulum
-					condimentum, mauris a mattis vestibulum, urna mauris cursus lorem, eu fringilla lacus
-					ante non est. Nullam vitae feugiat libero, eu consequat sem. Proin tincidunt neque
-					eros. Duis faucibus blandit ligula, mollis commodo risus sodales at. Sed rutrum et
-					turpis vel blandit. Nullam ornare congue massa, at commodo nunc venenatis varius.
-					Praesent mollis nisi at vestibulum aliquet. Sed sagittis congue urna ac consectetur.</p>
-					<p>Mauris eleifend eleifend felis aliquet ornare. Vestibulum porta velit at elementum
-					gravida nibh eget, volutpat odio. Proin rhoncus, sapien
-					mollis luctus hendrerit, orci dui viverra metus, et cursus nulla mi sed elit. Vestibulum
-					condimentum, mauris a mattis vestibulum, urna mauris cursus lorem, eu fringilla lacus
-					ante non est. Nullam vitae feugiat libero, eu consequat sem. Proin tincidunt neque
-					eros. Duis faucibus blandit ligula, mollis commodo risus sodales at. Sed rutrum et
-					turpis vel blandit. Nullam ornare congue massa, at commodo nunc venenatis varius.
-					Praesent mollis nisi at vestibulum aliquet. Sed sagittis congue urna ac consectetur.</p>
-					<p>Vestibulum pellentesque posuere lorem non aliquam. Mauris eleifend eleifend
-					felis aliquet ornare. Vestibulum porta velit at elementum elementum.</p>
+
+					<h3>Requirements</h3>
+					<ul>
+						<li>VirtualBox</li>
+						<li>Vagrant</li>
+					</ul>
 
 					<h3>Installation</h3>
-					The framework can be installed via Composer. Simply execute the following command:
-					<script src="https://gist.github.com/buonzz/efe667260c1cde6c6f02.js"></script>
+					<p>enter the following in the command line:</p>
+					<script src="https://gist.github.com/buonzz/df988a6f1d1433365db0.js"></script>
 
+
+					<h3>Usage</h3>
+					<p>When you booted up the box, it will create a virtual machine in your computer with the IP address <b>192.168.33.60</b>. Note however that the IP is not reachable over the network and only exists inside your computer. This virtual machine acts as a server on which you can do your development tasks.</p>
+					<p>The root folder (e.g. bamp/) can be accessed once you are inside the VM via  "/vagrant" path. So anything that you put inside the root folder will be automatically accessible within the VM itself. That means you can use any IDE locally and any of those local changes will get automatically sync inside the VM on which your site is being hosted for development.</p>
 				</article>
 
 		</div>

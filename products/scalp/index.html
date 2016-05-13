@@ -1,0 +1,139 @@
+---
+layout: left-sidebar
+title: Scalp - a command line tool to analyze and store your Media file's metadata
+---
+
+<div class="container" id="main">
+	<div class="row 150%">
+		<div class="4u 12u(narrower)">
+
+			<!-- Sidebar -->
+				<section id="sidebar">
+					<section>
+						<header>
+							<h3>Scalp</h3>
+						</header>
+						<p>A command line tool to analyze and store your Media file's metadata. Things like resolution, mime types, bitrates, EXIF(ISO, Shutter Speed, Focal Length, Date Captured etc) are one of the few things it will extract from your media files and store it to ElasticSearch -- enabling you to query your entire media collection in a programmatic way.</p>
+						<ul>
+							<li><a href="#installation">Installation</a></li>
+							<li><a href="#">Indexing Files</a></li>
+							<li><a href="#">Searching Files</a></li>
+							<li><a href="#">Analysis using Kibana</a></li>
+						</ul>
+					</section>
+					<section>
+						<a href="#" class="image featured"><img src="/images/scalp-1.png" alt="" /></a>
+						<header>
+							<h3>Commodo lorem varius</h3>
+						</header>
+						<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur et vel
+						sem sit amet dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et dolore
+						adipiscing elit. Curabitur vel sem sit.</p>
+						<ul>
+							<li><a href="#" class="button">Ipsum sed dolor</a></li>
+						</ul>
+					</section>
+				</section>
+
+		</div>
+		<div class="8u 12u(narrower) important(narrower)">
+
+			<!-- Content -->
+				<article id="content">
+					<header>
+						<h2>Overview</h2>
+						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Make a private "Search engine" for your images and video files.</p>
+					</header>
+
+					<p>Whether you are a Photographer, Content Producer, or a casual person who has a huge collection of images and videos, It is becoming a nightmare to find and manage your files, specially if they are stored in your hard drive in a very un-structured way (e.g. random folder names nested to each other). 
+					<br/>In one way or another, you might be asking this kind of questions:
+					<ul>
+						<li>&gt; What are the photos I've taken around March 5, 2016?</li>
+						<li>&gt; How often I use this resolution and bitrate for my videos?</li>
+						<li>&gt; What is the average file sizes of photos I took on 1st week of April?</li>
+					</ul>
+
+					This kind of questions (whatever scenario it might required to be answered) is very very tough to answer w/o having to resort to any digital media collection software.
+					</p>
+
+					<p>Though there might be some desktop applications that can manage these things for you, those are geared towards personal use and is hard to scale out using your single desktop computer, when lets say you have to handle 1 terabyte worth of media files. Integration is also a problem when you need to integrate it to a website and programmatically access along with some backend service.</p>
+
+					<p>There are online services that will both alow you manage your digital assets programmatically, like Flickr, Google Photos, Photo Bucket or Dropbox. But the problem is you usually don't want to upload "everything on the web", for example you just want to provide a local area network "search engine" to your employees and not outside the intranet. The cost might be also a big factor, when lets say you have 1+ terabyte worth of media files, this will be really expensive to host online.</p>
+
+
+					<p>Scalp - a command-line utility can certainly help you out in data-mining and analyzing your digial media files in large-scale. We actually don't recommend this to end-users who has no programming/system administration background since this is a very technical software and is meant to be integrated with larger system (CDN, media publishing sites, subscription-based services like Netflix and alike.)</p>
+
+					<h3>Features</h3>
+					<ul>
+						<li>&gt; Extract EXIF and other basic metadata information from your media files.</li>
+						<li>&gt; Storage of indexed to ElasticSearch which allows you to handle very huge amount of data</li>
+						<li>&gt; Thumbnail creation and storage to ElasticSearch</li>
+						<li>&gt; Easily visualize and create Dashboards and reports using Kibana</li>
+					</ul>
+
+
+					<h3 id="installation">Installation</h3>
+				
+					<p>For Debian/RHEL OS</p>
+{% highlight bash %}
+	wget http://downloads.buonzz.com/scalp.phar
+	sudo mv scalp.phar  /usr/local/bin/scalp
+	chmod +x /usr/local/bin/scalp
+{% endhighlight %}
+
+					<p>For Mac</p>
+					
+{% highlight bash %}
+	curl -o scalp.phar 'http://downloads.buonzz.com/scalp.phar'
+	sudo mv scalp.phar  /usr/local/bin/scalp
+	chmod +x /usr/local/bin/scalp
+{% endhighlight %}
+
+					<p>Currently, Windows-based OS is not supported yet, as this tool is largely geared towards use for long-running tasks and cron-based jobs.</p>
+
+				</article>
+
+		</div>
+	</div>
+	<div class="row features">
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper first">
+				<a href="#" class="image featured"><img src="{{ site.url }}/images/pic03.jpg" alt="" /></a>
+			</div>
+			<header>
+				<h3>Dolor sit consequat magna</h3>
+			</header>
+			<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
+			vel sem sit dolor neque semper magna lorem ipsum.</p>
+			<ul class="actions">
+				<li><a href="#" class="button">Elevate my awareness</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="{{ site.url }}/images/pic04.jpg" alt="" /></a>
+			</div>
+			<header>
+				<h3>Dolor sit consequat magna</h3>
+			</header>
+			<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
+			vel sem sit dolor neque semper magna lorem ipsum.</p>
+			<ul class="actions">
+				<li><a href="#" class="button">Elevate my awareness</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="{{ site.url }}/images/pic05.jpg" alt="" /></a>
+			</div>
+			<header>
+				<h3>Dolor sit consequat magna</h3>
+			</header>
+			<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
+			vel sem sit dolor neque semper magna lorem ipsum.</p>
+			<ul class="actions">
+				<li><a href="#" class="button">Elevate my awareness</a></li>
+			</ul>
+		</section>
+	</div>
+</div>

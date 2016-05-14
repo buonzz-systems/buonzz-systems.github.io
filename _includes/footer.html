@@ -9,6 +9,25 @@
 	<script type="text/javascript">
     $(function(){
 	    $.buonzz_hits();
+
+	    $('#contact-form').on('submit', function(e){
+	    	e.preventDefault();
+	    	var data = {
+	    		'name': $('#name').val(),
+	    		'email': $('#email').val(),
+				'message': $('#message').val(),
+	    	};
+
+	    	$.buonzz_hits({
+	    		'event_name': 'contact',
+	    		'event_data': data
+	    	});
+
+	    	alert('Message successfully submitted!');
+	    	document.getElementById("contact-form").reset();
+
+	    });
+
     });
     </script>
 

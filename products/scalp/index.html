@@ -3,6 +3,16 @@ layout: left-sidebar
 title: Scalp - a command line tool to analyze and store your Media file's metadata
 ---
 
+<style>
+	.table td, .table th{
+		text-align: left;
+		border:1px solid #f3f3f3;
+		padding:1px;
+	}
+	.table th{
+		font-weight: bold;
+	}
+</style>
 <div class="container" id="main">
 	<div class="row 150%">
 		<div class="4u 12u(narrower)">
@@ -16,7 +26,8 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 						<p>A command line tool to analyze and store your Media file's metadata. Things like resolution, mime types, bitrates, EXIF(ISO, Shutter Speed, Focal Length, Date Captured etc) are one of the few things it will extract from your media files and store it to ElasticSearch -- enabling you to query your entire media collection in a programmatic way.</p>
 						<ul>
 							<li><a href="#installation">Installation</a></li>
-							<li><a href="#">Indexing Files</a></li>
+							<li><a href="#configuration">Configuration</a></li>
+							<li><a href="#indexing">Indexing Files</a></li>
 							<li><a href="#">Searching Files</a></li>
 							<li><a href="#">Analysis using Kibana</a></li>
 						</ul>
@@ -45,10 +56,10 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Make a private "Search engine" for your images and video files.</p>
 					</header>
 
-					<p>Whether you are a Photographer, Content Producer, or a casual person who has a huge collection of images and videos, It is becoming a nightmare to find and manage your files, specially if they are stored in your hard drive in a very un-structured way (e.g. random folder names nested to each other). 
+					<p>Whether you are a managing a website for a Photographer, Content Producer, Subscription-based contents or you are a IT personnel who has to manage a huge collection of images and videos, It is becoming a nightmare to find and manage your files, specially if they are stored in server's hard drive  or in NAS in a very un-structured way (e.g. random folder names nested to each other). 
 					<br/>In one way or another, you might be asking this kind of questions:
 					<ul>
-						<li>&gt; What are the photos I've taken around March 5, 2016?</li>
+						<li>&gt; What are the photos taken around March 5, 2016?</li>
 						<li>&gt; How often I use this resolution and bitrate for my videos?</li>
 						<li>&gt; What is the average file sizes of photos I took on 1st week of April?</li>
 					</ul>
@@ -61,35 +72,185 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 					<p>There are online services that will both alow you manage your digital assets programmatically, like Flickr, Google Photos, Photo Bucket or Dropbox. But the problem is you usually don't want to upload "everything on the web", for example you just want to provide a local area network "search engine" to your employees and not outside the intranet. The cost might be also a big factor, when lets say you have 1+ terabyte worth of media files, this will be really expensive to host online.</p>
 
 
-					<p>Scalp - a command-line utility can certainly help you out in data-mining and analyzing your digial media files in large-scale. We actually don't recommend this to end-users who has no programming/system administration background since this is a very technical software and is meant to be integrated with larger system (CDN, media publishing sites, subscription-based services like Netflix and alike.)</p>
+					<p>Scalp - a command-line utility can certainly help you out in data-mining and analyzing your digital media files in large-scale. We actually don't recommend this to end-users who has no programming/system administration background since this is a very technical software and is meant to be integrated with larger system (CDN, media publishing sites, subscription-based services like Netflix and alike.)</p>
 
 					<h3>Features</h3>
 					<ul>
 						<li>&gt; Extract EXIF and other basic metadata information from your media files.</li>
-						<li>&gt; Storage of indexed to ElasticSearch which allows you to handle very huge amount of data</li>
+						<li>&gt; Store the extracted data to ElasticSearch and query it from there</li>
 						<li>&gt; Thumbnail creation and storage to ElasticSearch</li>
 						<li>&gt; Easily visualize and create Dashboards and reports using Kibana</li>
 					</ul>
 
 
 					<h3 id="installation">Installation</h3>
+
+					<p>Scalp can be easily installed globally in your machine, it is just a single phar archive which packs everything you need. However, it has a few requirements to run:
+
+					<ul>
+						<li>PHP 5.5 or greater</li>
+						<li>lib-curl, ext-exif, ext-gd, ext-curl, ext-json extensions enabled</li>
+						<li>ElasticSearch Server</li>
+					</ul>
+					</p>
 				
 					<p>For Debian/RHEL OS</p>
 {% highlight bash %}
-	wget http://downloads.buonzz.com/scalp.phar
-	sudo mv scalp.phar  /usr/local/bin/scalp
-	chmod +x /usr/local/bin/scalp
+wget http://downloads.buonzz.com/scalp.phar
+sudo mv scalp.phar  /usr/local/bin/scalp
+chmod +x /usr/local/bin/scalp
 {% endhighlight %}
 
 					<p>For Mac</p>
 					
 {% highlight bash %}
-	curl -o scalp.phar 'http://downloads.buonzz.com/scalp.phar'
-	sudo mv scalp.phar  /usr/local/bin/scalp
-	chmod +x /usr/local/bin/scalp
+curl -o scalp.phar 'http://downloads.buonzz.com/scalp.phar'
+sudo mv scalp.phar  /usr/local/bin/scalp
+chmod +x /usr/local/bin/scalp
 {% endhighlight %}
 
-					<p>Currently, Windows-based OS is not supported yet, as this tool is largely geared towards use for long-running tasks and cron-based jobs.</p>
+					<p>Currently, Windows is not supported yet, as this tool is largely geared towards use for long-running tasks and cron-based jobs. You can however use Vagrant to spin a little Ubuntu machine in your computer and mount your files there, this way you can still run Scalp on your Windows machine.</p>
+
+
+					<p>You can verify the scalp is installed properly by typing this command while in any folder:</p>
+
+{% highlight bash %}
+scalp -V
+{% endhighlight %}
+
+<p>This should output something like</p>
+
+{% highlight bash %}
+Scalp Metadata Extraction Tool by Darwin Biler version v2.0.4
+{% endhighlight %}
+
+<p>Congrats! you just had installed Scalp in your computer</p>
+
+					<h3 id="configuration">Configuration</h3>
+
+<p>To index a set of media files, you just need to place a configuration file in the folder (usually the top folder on where your images/videos is stored) you need to be indexed. The configuration file should be named <b>.env</b> . A sample .env file looks like below:</p>
+
+{% highlight bash %}
+DB_PROTOCOL=http
+DB_HOSTNAME=localhost
+DB_NAME=metadata
+DOC_TYPE=files
+DB_PORT=9200
+DB_USERNAME=null
+DB_PASSWORD=null
+DB_SHARDS=1
+DB_REPLICAS=1
+
+INPUT_FOLDER=./
+OUTPUT_FOLDER=dist
+LOG_FOLDER=./
+
+THUMB_PERCENT_RESIZE=10
+{% endhighlight %}
+
+
+				<p><br/><b>All these configuration options is optional!</b> Yes, you can even just execute scalp without configuration file at all, but that is assuming you are ok with the default values. When you did not specify a certain value, it will use the default value. This are the default values of each setting and its brief description</p>
+
+				<table  class="table">
+					<tr>
+						<th>Setting</th>
+						<th>Description</th>
+						<th>Default Value</th>
+					</tr>
+					<tr>
+						<td>DB_HOSTNAME</td>
+						<td>database hostname for the ElasticSearch Server</td>
+						<td>localhost</td>
+					</tr>
+					<tr>
+						<td>DB_NAME</td>
+						<td>index name of the documents in ElasticSearch</td>
+						<td>metadata</td>
+					</tr>
+					<tr>
+						<td>DB_PROTOCOL</td>
+						<td>whether to use SSL or plain http when connecting to ElasticSearch</td>
+						<td>http</td>
+					</tr>
+					<tr>
+						<td>DOC_TYPE</td>
+						<td>the document type in ElasticSearch to store into</td>
+						<td>files</td>
+					</tr>
+					<tr>
+						<td>DB_PORT</td>
+						<td>port number for ElasticSearch</td>
+						<td>9200</td>
+					</tr>
+					<tr>
+						<td>DB_USER</td>
+						<td>username to use to connect to ElasticSearch</td>
+						<td>null</td>
+					</tr>
+					<tr>
+						<td>DB_PASSWORD</td>
+						<td>password to use to connect to ElasticSearch</td>
+						<td>null</td>
+					</tr>
+					<tr>
+						<td>INPUT_FOLDER</td>
+						<td>path to folder you want to extract information from</td>
+						<td>current folder</td>
+					</tr>
+					<tr>
+						<td>OUTPUT_FOLDER</td>
+						<td>where to write json data and thumbnails</td>
+						<td>./dist (this will be created automatically)</td>
+					</tr>
+					<tr>
+						<td>LOG_FOLDER</td>
+						<td>where to write the log file, this is the log file generated by ElasticSearch client. Useful in debugging</td>
+						<td>current folder, you usually would like to set it to /var/log/scalp</td>
+					</tr>
+					<tr>
+						<td>THUMB_PERCENT_RESIZE</td>
+						<td>Used when creating thumbnails, this should be between 10-100, the images will be resized with this percent value</td>
+						<td>10</td>
+					</tr>
+				</table>
+
+				<p>One other option is to define these variables in your .bash_profile or .bashrc files, this is when writing .env files to media folder is not possible ( read-only NFS mounts for example ).</p>
+					
+
+
+					<h3 id="indexing">Indexing Files</h3>
+
+					<p>An Index in ElasticSearch is the equivalent of database in RDBMS like MySQL or SQL Server. The indexing process means extracting the metadata information of your media files and store it to an Index in ElasticSearch.</p>
+
+					<p>Why this is very important is, you would normally would not like to constantly re-extract the same information from your media files everytime you need to search something. For example, if you would like to search for all videos which has length of 4 minutes, instead of querying every video files each time this query is needed we just extract all the video length during indexing process and store those to ElasticSearch. Everytime a user asks a query related to video length, this info is searched on ElasticSearch, instead of analyzing every files. This provides an enormous amount of speed and scalability in your infrastructure since ElasticSearch caches the information and can handle really huge amount of queries.</p>
+
+					
+
+				<p>Once you have the configuration worked out, indexing is as simple as going to the location of that config file and type</p>
+
+{% highlight bash %}
+scalp
+{% endhighlight%}
+				<p>Basically, it will try to detect first if the index is already existing in your ElasticSearch server, if it is not, it will try to create the index and field mappings. Once the mapping is created, it will start scanning the files in INPUT_FOLDER for media files (it will skip over non-media contents such as csv, doc, xls etc). The good thing about Scalp is, it doesn't require you to structure your folders in any particular order, you can retain whatever the current structure of your folder, making it ideal for messy files wherein miscellanous files is intermixed with other non-media files.
+				<br/><br/>
+				<img width="500" src="/images/scalp-3.png"/>
+				</p>
+
+
+				<p>For each file, it will try to extract the following information
+				<br/><br/>
+				<img width="500" src="/images/scalp-4.png"/>
+				<br/><br/>
+				Once indexed, this is fully available from within ElasticSearch and you can do whatever you want (given that you know how to query ElasticSearch). There might be many other additional fields added by future versions of Scalp which makes it even more powerful. 
+				</p>
+
+				<h4 style="font-weight:bold;">Re-indexing</h4>
+				<p>When a certain file is added or re-uploaded/changed, we might need to perform re-indexing, so that the data in ElasticSearch will be up-to-date. One great feature of Scalp is, its ability to determine which file has changed its contents. How it determines that information is by recording a hash (the file_content_hash field in the screenshot above ), which is basically unique for every contents. Once you edited a certain file and re-uploaded it, its hash will change. Next time you re-run scalp command, it will try to compare if the hash had changed, and if did not, it will "skip" it and wont re-index it to ElasticSearch. As a result, each time you run scalp command, only those files that is changed will going to be re-indexed, saving you valuable bandwidth and speed.
+				<br/><br/>
+				<img width="500" src="/images/scalp-2.png"/>
+				<br/><br/>
+				This allows you to conviniently schedule scalp command in cron, so it will detect any changed files and automatically re-index those.
+				</p>
 
 				</article>
 

@@ -1,0 +1,147 @@
+---
+layout: left-sidebar
+title: Homestead Installers
+---
+
+<div class="container" id="main">
+	<div class="row 150%">
+		<div class="4u 12u(narrower)">
+
+			<!-- Sidebar -->
+				<section id="sidebar">
+					<section>
+						<header>
+							<h3>Homestead Installers</h3>
+						</header>
+						<p>Complementary Installer Scripts for Laravel Homestead.</p>
+						<ul>
+							<li><a href="#installation">Installation</a></li>
+							<li><a href="#configuration">Configuration</a></li>
+							<li><a href="#updating">Updating</a></li>
+						</ul>
+					</section>
+					<section>
+						<header>
+							<h3>Installers Supported</h3>
+						</header>
+						<ul>
+							<li><a href="#setup_java">Oracle Java</a></li>
+							<li><a href="#setup_tomcat">Tomcat 8</a></li>
+							<li><a href="#setup_ruby">Ruby</a></li>
+							<li><a href="#setup_docker">Docker</a></li>
+							<li><a href="#setup_coffeescript">CoffeeScript</a></li>
+							<li><a href="#setup_sass">SASS</a></li>
+							<li><a href="#setup_jekyll">Jekyll</a></li>
+							<li><a href="#setup_elasticsearch">ElasticSearch</a></li>
+							<li><a href="#setup_maven">Maven</a></li>
+						</ul>
+					</section>
+				</section>
+
+		</div>
+		<div class="8u 12u(narrower) important(narrower)">
+
+			<!-- Content -->
+				<article id="content">
+					<header>
+						<h2>Overview</h2>
+						<p>Need Ruby, Java, Docker etc. installed in your Laravel Homestead?</p>
+					</header>
+					<h3>Why</h3>
+					<p>At some point, you might need to use some tools/software in your application that did not come by default with standard Homestead box. Like for example, Ruby. You usually have to manually install it yourself (tedious) or need to have it installed in your host machine (terrible).</p>
+
+					<p>As more and more tools is needed, you have to do a lot of googling on how to install this X tool, which will be very tedious to re-setup each time you need to put up a fresh Homestead box.</p>
+					<p>Homestead installers is a set of curated bash scripts that provides an easy way for you to install softwares inside your Homestead box, with minimal effort in your end.</p>
+
+					<p>For example, to install Ruby, it is as easy as logging into your homestead box via ssh and then typing</p>
+
+{% highlight bash %}
+setup_ruby
+{% endhighlight %}
+
+					<p>Ain't that is easy? The script will do the heavy lifting for you. The good thing about this is, even if all the quirky details of installing Ruby had changed, the above command will not change, saving you all the headache of constantly googling the "best way to install ruby in ubuntu"</p>
+
+					<p>Most of the time, it is very easy to predict the command to install a particular tool, since all of them is prefixed with <b>setup_</b>.like for example, to install Java, just hit <b>setup_java</b>, to install Docker, type <b>setup_docker</b> and so on.</p>
+
+					<h3 id="installation">Installation</h3>
+					<p>It is easy to install this tool once you already have Homestead installed in your machine. If you haven't installed it yet, go ahead and install it. Once Homestead is installed (assuming you have it installed it in <b>~/Homestead</b> folder), you just need to go to that folder and clone the homestead-installers repository</p>
+
+{% highlight bash %}
+cd ~/Homestead
+https://github.com/buonzz/homestead-installers.git
+{% endhighlight %}
+
+					<h3 id="configuration">Configuration</h3>
+	
+					<p>After the repository is clone, let us make it hooked into Homestead provisioning script by editing the after.sh file in ~/.homestead folder</p>
+{% highlight bash %}
+vi ~/.homestead/after.sh
+{% endhighlight %}
+
+					<p>Add the following code in a new line</p>
+{% highlight bash %}
+sudo bash /vagrant/homestead-installers/init.sh
+{% endhighlight %}
+					<p>Provision the Homestead box for the change to take effect.</p>
+
+{% highlight bash %}
+cd ~/Homestead
+vagrant provision
+{% endhighlight %}
+
+
+					<p>Once this is completed, several setup_* scripts is now available globally in your Homestead machine. See the Usage section for more details.</p>
+
+					<h3 id="updating">Updating</h3>
+					<p>There might be new software installer available added in the repository, or there might be new methods of installing a particular tool. For this reason, it might be a good idea to keep your homestead-installers copy sync with the remote repo. To do this:</p>
+{% highlight bash %}
+cd ~/Homestead/homestead-installers
+git pull origin master
+{% endhighlight %}
+					<p>Make sure you re-provision the Homestead box for the changes to take effect.</p>
+				</article>
+
+		</div>
+	</div>
+	<div class="row features">
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper first">
+				<a href="#" class="image featured"><img src="{{ site.url }}/images/pic03.jpg" alt="" /></a>
+			</div>
+			<header>
+				<h3>Dolor sit consequat magna</h3>
+			</header>
+			<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
+			vel sem sit dolor neque semper magna lorem ipsum.</p>
+			<ul class="actions">
+				<li><a href="#" class="button">Elevate my awareness</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="{{ site.url }}/images/pic04.jpg" alt="" /></a>
+			</div>
+			<header>
+				<h3>Dolor sit consequat magna</h3>
+			</header>
+			<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
+			vel sem sit dolor neque semper magna lorem ipsum.</p>
+			<ul class="actions">
+				<li><a href="#" class="button">Elevate my awareness</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="{{ site.url }}/images/pic05.jpg" alt="" /></a>
+			</div>
+			<header>
+				<h3>Dolor sit consequat magna</h3>
+			</header>
+			<p>Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
+			vel sem sit dolor neque semper magna lorem ipsum.</p>
+			<ul class="actions">
+				<li><a href="#" class="button">Elevate my awareness</a></li>
+			</ul>
+		</section>
+	</div>
+</div>

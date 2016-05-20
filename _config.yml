@@ -9,3 +9,7 @@ github_username:  buonzz-systems
 
 # Build settings
 markdown: kramdown
+permalink: /:title/
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+gems: [jekyll-paginate]

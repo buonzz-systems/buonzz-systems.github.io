@@ -1,0 +1,19 @@
+---
+layout: no-sidebar
+title: Guides
+permalink: /guides/
+---
+<style>
+	.page-title{
+			font-size:2em;
+			margin-bottom: 1em;
+			margin-top: 1em;
+	}
+</style>
+<h1 class="page-title">Guides</h1>
+
+<p>Here are the collection of curated list of tutorials, articles and useful reference for you to use. This are supplementary step-by-step guides when using any of our products, or just merely trying to read deeper on some concepts and technical background.</p>
+
+{% for post in site.posts %}	
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>			
+{% endfor %}	

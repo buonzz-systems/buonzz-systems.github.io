@@ -13,7 +13,7 @@ title: Restler Boot - A Microframework for Domain-Driven Design RESTful API
 						<header>
 							<h3>Restler Boot</h3>
 						</header>
-						<p>A Micro-framework for building REST+JSON API with emphasis on Domain Driven Design methodology and NoSQL persistence.</p>
+						<p>A Micro-framework for building REST+JSON API with emphasis on Domain Driven Design methodology and NoSQL persistence. Its a set of libraries and application structure to help you build RESTful API in the fastest way by pre-configuring defaults. It is built on top of the popular <a href="http://luracast.com/products/restler/">Restler</a> by <a href="http://www.luracast.com/">Luracast</a></p>
 						<ul>
 							<li><a href="#features">Features</a></li>
 							<li><a href="#installation">Installation</a></li>
@@ -52,7 +52,43 @@ title: Restler Boot - A Microframework for Domain-Driven Design RESTful API
 						<li>HATEOAS compliant</li>
 						<li>NoSQL enabled for BigData capability</li>
 					</ul>
-					<a href="#" class="image featured"><img src="{{ site.url }}/images/CleanArchitecture-c7e91709b3072cd9db429a6d2a811703.jpg" alt="clean architecture" /></a>
+
+					<p>Unlike traditional web frameworks which attempts to do everything, Restler Boot is a highly opinionated and is meant for a very specific use-case. Not only it targets purely RESTful JSON API, but it also attempts to structure your application with HATEOAS in mind.</p>
+
+					<p>The primary objects in Restler Boot are not the Models, View neither Controllers. Instead we had shifted it into <b>Resource</b> and <b>Collections</b></p>
+
+					<p>A Resource is the object we want to expose in the API, this is usually represented by a single entity or table in the database. For example user, account, transaction and bank are all Resources.</p>
+
+					<p>A group of Resources is called Collection, this is usually represented as an array of JSON objects.</p>
+					<p>Whenever we need to perform any operation in resources (create,read,update,delete) it has to be in the form of HTTP verbs: PUT, GET, POST, DELETE. All other methods of manipulating data is strongly discouraged.</p>
+
+					<table class="table">
+						<tr>
+							<th>Operation</th>
+							<th>HTTP Verb</th>
+							<th>Sample URL</th>
+						</tr>
+						<tr>
+							<td>Create</td>
+							<td>PUT</td>
+							<td>http://api.example.com/banks</td>
+						</tr>
+						<tr>
+							<td>Read</td>
+							<td>GET</td>
+							<td>http://api.example.com/banks/123</td>
+						</tr>
+						<tr>
+							<td>Update</td>
+							<td>POST</td>
+							<td>http://api.example.com/banks</td>
+						</tr>
+						<tr>
+							<td>Delete</td>
+							<td>DELETE</td>
+							<td>http://api.example.com/banks/123</td>
+						</tr>
+					</table>
 
 					<h3 id="installation">Installation</h3>
 

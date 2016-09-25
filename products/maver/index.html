@@ -1,6 +1,6 @@
 ---
 layout: left-sidebar
-title: Scalp - a command line tool to analyze and store your Media file's metadata
+title: Maver - Content Discovery System for your Media files
 ---
 
 <style>
@@ -21,15 +21,14 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 				<section id="sidebar">
 					<section>
 						<header>
-							<h3>Scalp</h3>
+							<h3>What is CDS?</h3>
 						</header>
-						<p>A command line tool to analyze and store your Media file's metadata. Things like resolution, mime types, bitrates, EXIF(ISO, Shutter Speed, Focal Length, Date Captured etc) are one of the few things it will extract from your media files and store it to ElasticSearch -- enabling you to query your entire media collection in a programmatic way.</p>
+<p>A Content Discovery System allows your to analyze and discover your collection of photos and videos. Most of the media files we generate from our cellphones, handy cam, and other devices are usually stored randomly in our computer hard drive without any structure or pattern.Maver (a CDS software) allows you to browse and search your media files w/o re-structuring your existing folders.</p>
 						<ul>
 							<li><a href="#installation">Installation</a></li>
 							<li><a href="#configuration">Configuration</a></li>
-							<li><a href="#indexing">Indexing Files</a></li>
+							<li><a href="#indexing">Browsing Files</a></li>
 							<li><a href="#">Searching Files</a></li>
-							<li><a href="#">Analysis using Kibana</a></li>
 						</ul>
 					</section>
 					<section>
@@ -56,11 +55,24 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 				<article id="content">
 					<header>
 						<h2>Overview</h2>
-						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Extract your media files metadata and store it into ElasticSearch.</p>
+						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Make a private "Search engine" for your images and video files.</p>
 					</header>
 
-					<p>Metadata extraction is never been easy. Just install the stand-alone phar file in your server, and run this as a cron job.
+					<p>Whether you are a managing a website for a Photographer, Content Producer, Subscription-based contents or you are a IT personnel who has to manage a huge collection of images and videos, It is becoming a nightmare to find and manage your files, specially if they are stored in server's hard drive  or in NAS in a very un-structured way (e.g. random folder names nested to each other). 
+					<br/>In one way or another, you might be asking this kind of questions:
+					<ul>
+						<li>&gt; What are the photos taken around March 5, 2016?</li>
+						<li>&gt; How often I use this resolution and bitrate for my videos?</li>
+						<li>&gt; What is the average file sizes of photos I took on 1st week of April?</li>
+					</ul>
+
+					This kind of questions (whatever scenario it might required to be answered) is very very tough to answer w/o having to resort to any digital media collection software.
 					</p>
+
+					<p>Though there might be some desktop applications that can manage these things for you, those are geared towards personal use and is hard to scale out using your single desktop computer, when lets say you have to handle 1 terabyte worth of media files. Integration is also a problem when you need to integrate it to a website and programmatically access along with some backend service.</p>
+
+					<p>There are online services that will both alow you manage your digital assets programmatically, like Flickr, Google Photos, Photo Bucket or Dropbox. But the problem is you usually don't want to upload "everything on the web", for example you just want to provide a local area network "search engine" to your employees and not outside the intranet. The cost might be also a big factor, when lets say you have 1+ terabyte worth of media files, this will be really expensive to host online.</p>
+
 
 					<p>Scalp - a command-line utility can certainly help you out in data-mining and analyzing your digital media files in large-scale. We actually don't recommend this to end-users who has no programming/system administration background since this is a very technical software and is meant to be integrated with larger system (CDN, media publishing sites, subscription-based services like Netflix and alike.)</p>
 
@@ -75,7 +87,7 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 
 					<h3 id="installation">Installation</h3>
 
-					<p>Scalp can be easily installed globally in your machine, it is just a single phar archive which packs everything you need. However, it has a few requirements to run:
+					<p>Maver can be easily installed globally in your machine, it is just a single phar archive which packs everything you need. However, it has a few requirements to run:
 
 					<ul>
 						<li>PHP 5.5 or greater</li>

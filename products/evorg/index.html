@@ -63,15 +63,14 @@ title: Evorg - Event Logging and Analytics for Laravel and ElasticSearch
 					</p>
 
 					<h3>Inability to scale-out the write operations</h3>
-					<p>As your traffic grows, the number of INSERT, UPDATE and DELETE operations also grows. MySQL slaves and redundancy only allows your to distribute the queries into multiple servers but the write operations is still need to be done in the master - that is a single point of failure and could easily lead into scalability problems on your application.</p>
+					<p>As your traffic grows, the number of INSERT, UPDATE and DELETE operations also grows. MySQL slaves and redundancy only allows you to distribute the read queries into multiple servers but the write operations is still need to be done in the master - that is a single point of failure and could easily lead into scalability problems on your application. While there are ways to allow scaling the write operations in a traditional RDMBS, but it is VERY VERY expensive to setup, host and maintain.</p>
 
 					<h3>Dataset is too huge to fit in a single machine</h3>
-					<p>Normally, when the table is growing large, we just purge/truncate it. But what if you cant afford to delete data? Like for example, if you need to be able to drill-down and analyze different metrics for the last 5 years, you are in out of luck in querying all that data in MySQL.<br/>
-					If your database is lets say 200GB worth of data, MySQL needs to load that entire dataset into memory and perform the joins and lookup there -- that is not usually possible even if you got tons of slaves!
+					<p>Normally, when the table is growing large, we just purge/truncate it. But what if you cant afford to delete data? Like for example, if you need to be able to drill-down and analyze different metrics for the last 5 years, you are in out of luck in querying all that data in MySQL. (good luck in performing sql join to a table with 10 million of rows!). If your database is lets say 200GB worth of data, MySQL needs to load that entire dataset into memory and perform the joins and lookup there -- that is not usually possible even if you got tons of slaves!
 					</p>
 
 					<h3>Response-time of the application is drastically affected as you collect more metrics</h3>
-					<p>If you want to be really as much as detailed as possible, even tracking the individual mouse-moves of the surfers (a bit extreme!) You will realize that you can easily DDOS your own application and drastically slow it down because it needs to insert many things to your MySQL database to complete each request. Combine that with an enormously huge table and its for sure a perfect recipe to a disaster.
+					<p>If you want to be really as much as detailed as possible to the point that you are even tracking the individual mouse-moves of the surfers as their mouse hovers across your site (a bit extreme!) You will realize that you can easily DDOS your own application and drastically slow it down because it needs to insert many things to your MySQL database to complete each request. Combine that with an enormously huge table and its for sure a perfect recipe to a disaster.
 					</p>
 
 					<h2>Introducing Evorg</h3>
@@ -80,8 +79,8 @@ title: Evorg - Event Logging and Analytics for Laravel and ElasticSearch
 					<h3>Features</h3>
 					<ul>
 						<li>&gt; Easy syntax and intuitive methods of data collection.</li>
-						<li>&gt; Can be easily scaled out in large deployments, even if you have terabytes data by distributing both the write and read operations into multiple servers.</li>
-						<li>&gt; Self-hosted and thus cheaper solution than other commercial alternatives ( Google Analytics, Segment etc).</li>
+						<li>&gt; Can be easily scaled out in large deployments, even if you have terabytes data. This is because Evorg allows your to distribue both the write and read operations into multiple servers.</li>
+						<li>&gt; Self-hosted and thus cheaper solution than other open-source and commercial alternatives ( Google Analytics, Segment, Hadoop etc).</li>
 						<li>&gt; Schema-less JSON data, which means you can dynamically pass any fields.</li>
 						<li>&gt; NOSQL solution and allows you to flexibly re-shape your fields anytime</li>
 						<li>&gt; Asynchronously records the tracking data in background queue, so it doesnt affects the response time of your web application</li>

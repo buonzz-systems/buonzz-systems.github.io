@@ -1,0 +1,167 @@
+---
+layout: left-sidebar
+title: Evorg - Event Logging and Analytics for Laravel and ElasticSearch
+---
+
+<style>
+	.table td, .table th{
+		text-align: left;
+		border:1px solid #f3f3f3;
+		padding:1px;
+	}
+	.table th{
+		font-weight: bold;
+	}
+</style>
+<div class="container" id="main">
+	<div class="row 150%">
+		<div class="4u 12u(narrower)">
+
+			<!-- Sidebar -->
+				<section id="sidebar">
+					<section>
+						<header>
+							<h3>Why?</h3>
+						</header>
+						<p>There might be times that you prefer to collect and process some business-side and application level metrics ( page views, clicks, signups etc ), store them into your own server and create reports on that. Only problem is, this data can grow so large and it might possibly crash your MySQL database!<br/>Evorg is a Laravel package to help you collect enormously huge amount of data and analyze them in a scalable manner, even if you have terabytes of data collected!</p>
+						<ul>
+							<li><a href="#">How it Works?</a></li>
+							<li><a href="#installation">Installation</a></li>
+							<li><a href="#">Configuration</a></li>
+							<li><a href="#">Collecting Data</a></li>
+							<li><a href="#">Retrieving Data</a></li>
+						</ul>
+					</section>
+					<section>
+						<header>
+							<h3>Do you find this tool useful?</h3>
+						</header>
+						<p>
+						We offer this tool for free w/o any restrictions. You can help us maintain this project by providing us support, rest assured that every penny you had donated is worth it.
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="JALX28UNSUPPG">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						</form>
+						.</p>
+					</section>
+				</section>
+
+		</div>
+		<div class="8u 12u(narrower) important(narrower)">
+
+			<!-- Content -->
+				<article id="content">
+					<header>
+						<h2>Overview</h2>
+						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Easily build and host your own Analytics platform!</p>
+					</header>
+
+					<p>Upon installing this Laravel Package, you can collect bussiness and application "Events" about your application and store them into ElasticSearch. This can be a "item_purchased", "page_viewed" or "button_clicked" events, anything actually!
+					<br/>Once you had collected these metrics, you would normally query that and build reports out of it. Yes you can do the same by just creating MySQL tables and insert those information there, but as your application and traffic grows large, you'll be facing these issues on such approach:
+					</p>
+
+					<h3>Inability to scale-out the write operations</h3>
+					<p>As your traffic grows, the number of INSERT, UPDATE and DELETE operations also grows. MySQL slaves and redundancy only allows your to distribute the queries into multiple servers but the write operations is still need to be done in the master - that is a single point of failure and could easily lead into scalability problems on your application.</p>
+
+					<h3>Dataset is too huge to fit in a single machine</h3>
+					<p>Normally, when the table is growing large, we just purge/truncate it. But what if you cant afford to delete data? Like for example, if you need to be able to drill-down and analyze different metrics for the last 5 years, you are in out of luck in querying all that data in MySQL.<br/>
+					If your database is lets say 200GB worth of data, MySQL needs to load that entire dataset into memory and perform the joins and lookup there -- that is not usually possible even if you got tons of slaves!
+					</p>
+
+					<h3>Response-time of the application is drastically affected as you collect more metrics</h3>
+					<p>If you want to be really as much as detailed as possible, even tracking the individual mouse-moves of the surfers (a bit extreme!) You will realize that you can easily DDOS your own application and drastically slow it down because it needs to insert many things to your MySQL database to complete each request. Combine that with an enormously huge table and its for sure a perfect recipe to a disaster.
+					</p>
+
+					<h2>Introducing Evorg</h3>
+					<p>Evorg is a Laravel package that allows you to collect and analyze business and analytics data and store them in a very scalable manner.</p>
+
+					<h3>Features</h3>
+					<ul>
+						<li>&gt; Easy syntax and intuitive methods of data collection.</li>
+						<li>&gt; Can be easily scaled out in large deployments, even if you have terabytes data by distributing both the write and read operations into multiple servers.</li>
+						<li>&gt; Self-hosted and thus cheaper solution than other commercial alternatives ( Google Analytics, Segment etc).</li>
+						<li>&gt; Schema-less JSON data, which means you can dynamically pass any fields.</li>
+						<li>&gt; NOSQL solution and allows you to flexibly re-shape your fields anytime</li>
+						<li>&gt; Asynchronously records the tracking data in background queue, so it doesnt affects the response time of your web application</li>
+						<li>&gt; Supports "sharding" of your data so that even if it grew so large (and cant fit into a single machine) the data will be split into multiple servers and query it as if its just a single database</li>
+					</ul>
+
+
+					<h3 id="installation">Installation</h3>
+
+					<p>Evorg is a Laravel package and has a few requirements to run:
+
+					<ul>
+						<li>PHP >= 5.5.9</li>
+						<li>ElasticSearch Server</li>
+					</ul>
+
+					add it in your composer.json 
+{% highlight bash %}
+composer require buonzz/evorg
+{% endhighlight %}
+					update composer by executing this in your project base folder
+{% highlight bash %}
+composer update
+{% endhighlight %}
+
+					add the service provider in config/app.php in providers array					
+{% highlight bash %}
+        Buonzz\Evorg\ServiceProvider::class,
+{% endhighlight %}
+
+					add the alias in config/app.php in aliases array
+{% highlight bash %}
+        'Evorg'   => Buonzz\Evorg\EvorgFacade::class
+{% endhighlight %}
+					publish the config settings
+{% highlight bash %}
+php artisan vendor:publish
+{% endhighlight %}
+</p>
+
+				</article>
+
+		</div>
+	</div>
+	<div class="row features">
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper first">
+				<a href="#" class="image featured"><img src="/images/onetimeonly-1.png" alt="One time only" /></a>
+			</div>
+			<header>
+				<h3>OnetimeOnly</h3>
+			</header>
+			<p>A Java-based web application for securely sharing confidential information via one-time visit links.</p>
+			<ul class="actions">
+				<li><a href="http://secure-reaches-25179.herokuapp.com/" class="button">View Demo</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="/images/best-practices-2.png" alt="Laravel Best Practices" /></a>
+			</div>
+			<header>
+				<h3>Laravel Best Practices</h3>
+			</header>
+			<p>A curated list of best practices in writing, maintaining and deploying Laravel applications.</p>
+			<ul class="actions">
+				<li><a href="http://www.laravelbestpractices.com/" class="button">Visit Site</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="/images/restler-boot-1.png" alt="" /></a>
+			</div>
+			<header>
+				<h3>Restler Boot</h3>
+			</header>
+			<p>A Micro-framework for building Microservices.</p>
+			<ul class="actions">
+				<li><a href="/products/restler-boot/" class="button">View Project</a></li>
+			</ul>
+		</section>
+	</div>
+</div>

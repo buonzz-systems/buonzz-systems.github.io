@@ -1,0 +1,228 @@
+---
+layout: left-sidebar
+title: Elastictl - a command line tool to easily manage ElasticSearch Indices
+---
+
+<style>
+	.table td, .table th{
+		text-align: left;
+		border:1px solid #f3f3f3;
+		padding:1px;
+	}
+	.table th{
+		font-weight: bold;
+	}
+</style>
+<div class="container" id="main">
+	<div class="row 150%">
+		<div class="4u 12u(narrower)">
+
+			<!-- Sidebar -->
+				<section id="sidebar">
+					<section>
+						<header>
+							<h3>Elastictl</h3>
+						</header>
+						<p>a command line tool to easily manage ElasticSearch Indices.</p>
+						<ul>
+							<li><a href="#installation">Installation</a></li>
+							<li><a href="#configuration">Configuration</a></li>
+							<li><a href="#indexing">Listing Indices</a></li>
+							<li><a href="#">Sorting Indices</a></li>
+							<li><a href="#">Styling Output</a></li>
+							<li><a href="#">Filtering Results</a></li>
+						</ul>
+					</section>
+					<section>
+						<a href="#" class="image featured"><img src="/images/scalp-1.png" alt="" /></a>
+						<header>
+							<h3>Do you find this tool useful?</h3>
+						</header>
+						<p>
+						We offer this tool for free w/o any restrictions. You can help us maintain this project by providing us support, rest assured that every penny you had donated is worth it.
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="JALX28UNSUPPG">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						</form>
+						.</p>
+					</section>
+				</section>
+
+		</div>
+		<div class="8u 12u(narrower) important(narrower)">
+
+			<!-- Content -->
+				<article id="content">
+					<header>
+						<h2>Overview</h2>
+						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">List and manage your ElasticSearch indices easily via command line.</p>
+					</header>
+
+					<p>Crafting very verbose JSON object to manipulate and view ElasticSeach indices is really hard!.
+					</p>
+
+					<p>Elastictl - a command-line utility can certainly help you in managing ElasticSearch data more easier</p>
+
+					<h3>Features</h3>
+					<ul>
+						<li>&gt; Simple command, no verbose JSON syntax.</li>
+						<li>&gt; Show output in tabular form, like MySQL. No need to read JSON objects</li>
+						<li>&gt; Single-file application, no need to meddle with installing Kibana, Sense and its dependencies</li>
+						<li>&gt; Makes every tedious operation really easy (renaming fields, listing indices etc)</li>
+					</ul>
+
+
+					<h3 id="installation">Installation</h3>
+
+					<p>Elastictl can be easily installed globally in your machine, it is just a single phar archive which packs everything you need. However, it has a few requirements to run:
+
+					<ul>
+						<li>PHP 5.5 or greater</li>
+						<li>lib-curl, ext-curl, ext-json extensions enabled</li>
+						<li>ElasticSearch Server</li>
+					</ul>
+					</p>
+				
+					<p>For Debian/RHEL OS</p>
+{% highlight bash %}
+wget https://downloads.buonzz.com/elastictl.phar
+sudo mv elastictl.phar  /usr/local/bin/elastictl
+chmod +x /usr/local/bin/elastictl
+{% endhighlight %}
+
+					<p>For Mac</p>
+					
+{% highlight bash %}
+curl -o elastictl.phar 'https://downloads.buonzz.com/elastictl.phar'
+sudo mv elastictl.phar  /usr/local/bin/elastictl
+chmod +x /usr/local/bin/elastictl
+{% endhighlight %}
+
+
+					<p>You can verify the elastictl is installed properly by typing this command while in any folder:</p>
+
+{% highlight bash %}
+elastictl -V
+{% endhighlight %}
+
+<p>Congrats! you just had installed Scalp in your computer</p>
+
+					<h3 id="configuration">Configuration</h3>
+
+<p>You need to place a configuration file in the folder where you plan to execute this command (usually in the home folder). The configuration file should be named <b>.env</b> . A sample .env file looks like below:</p>
+
+{% highlight bash %}
+ES_HOST=127.0.0.1
+ES_PROTOCOL=http
+ES_PORT=9200
+ES_USERNAME=null
+ES_PASSWORD=null
+ES_TIMEOUT=3
+ES_LOGGING=false
+ES_LOGFILE=/var/log/elastictl.log
+MEMCACHED_SERVER=127.0.0.1
+{% endhighlight %}
+
+
+				<p><br/><b>All these configuration options is optional!</b> Yes, you can even just execute elastictl without configuration file at all, but that is assuming you are ok with the default values. When you did not specify a certain value, it will use the default value. This are the default values of each setting and its brief description</p>
+
+				<table  class="table">
+					<tr>
+						<th>Setting</th>
+						<th>Description</th>
+						<th>Default Value</th>
+					</tr>
+					<tr>
+						<td>ES_HOST</td>
+						<td>database hostname for the ElasticSearch Server</td>
+						<td>127.0.0.1</td>
+					</tr>
+					<tr>
+						<td>ES_PROTOCOL</td>
+						<td>whether to use SSL or plain http when connecting to ElasticSearch</td>
+						<td>http</td>
+					</tr>
+					<tr>
+						<td>ES_PORT</td>
+						<td>port number for ElasticSearch</td>
+						<td>9200</td>
+					</tr>
+					<tr>
+						<td>ES_USER</td>
+						<td>username to use to connect to ElasticSearch</td>
+						<td>null</td>
+					</tr>
+					<tr>
+						<td>ES_PASSWORD</td>
+						<td>password to use to connect to ElasticSearch</td>
+						<td>null</td>
+					</tr>
+					<tr>
+						<td>ES_TIMEOUT</td>
+						<td>How long a certain query should wait</td>
+						<td>3</td>
+					</tr>
+					<tr>
+						<td>ES_LOGGING</td>
+						<td>whether logging is on or off</td>
+						<td>false</td>
+					</tr>
+					<tr>
+						<td>ES_LOGFILE</td>
+						<td>what is the location of the log file</td>
+						<td>/var/log/elastictl.log</td>
+					</tr>
+					<tr>
+						<td>MEMCACHED_SERVER</td>
+						<td>hostname of the memcached server</td>
+						<td>127.0.0.1</td>
+					</tr>
+				</table>
+
+				<p>One other option is to define these variables in your .bash_profile or .bashrc files.</p>
+
+				</article>
+
+		</div>
+	</div>
+	<div class="row features">
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper first">
+				<a href="#" class="image featured"><img src="/images/onetimeonly-1.png" alt="One time only" /></a>
+			</div>
+			<header>
+				<h3>OnetimeOnly</h3>
+			</header>
+			<p>A Java-based web application for securely sharing confidential information via one-time visit links.</p>
+			<ul class="actions">
+				<li><a href="http://secure-reaches-25179.herokuapp.com/" class="button">View Demo</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="/images/best-practices-2.png" alt="Laravel Best Practices" /></a>
+			</div>
+			<header>
+				<h3>Laravel Best Practices</h3>
+			</header>
+			<p>A curated list of best practices in writing, maintaining and deploying Laravel applications.</p>
+			<ul class="actions">
+				<li><a href="http://www.laravelbestpractices.com/" class="button">Visit Site</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="/images/restler-boot-1.png" alt="" /></a>
+			</div>
+			<header>
+				<h3>Restler Boot</h3>
+			</header>
+			<p>A Micro-framework for building Microservices.</p>
+			<ul class="actions">
+				<li><a href="/products/restler-boot/" class="button">View Project</a></li>
+			</ul>
+		</section>
+	</div>
+</div>

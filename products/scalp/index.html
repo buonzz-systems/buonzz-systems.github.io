@@ -23,7 +23,7 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 						<header>
 							<h3>Scalp</h3>
 						</header>
-						<p>A command line tool to analyze and store your Media file's metadata. Things like resolution, mime types, bitrates, EXIF(ISO, Shutter Speed, Focal Length, Date Captured etc) are one of the few things it will extract from your media files and store it to ElasticSearch -- enabling you to query your entire media collection in a programmatic way.</p>
+						<p>A command line tool to analyze and store your Media file's metadata. Things like resolution, mime types, bitrates, EXIF(ISO, Shutter Speed, Focal Length, Date Captured etc) are one of the few things it will extract from your media files and store it to different backend storage -- enabling you to query your entire media collection in a programmatic way.</p>
 						<ul>
 							<li><a href="#installation">Installation</a></li>
 							<li><a href="#configuration">Configuration</a></li>
@@ -56,19 +56,19 @@ title: Scalp - a command line tool to analyze and store your Media file's metada
 				<article id="content">
 					<header>
 						<h2>Overview</h2>
-						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Extract your media files metadata and store it into ElasticSearch.</p>
+						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Extract your media files metadata and store it in your backend storage.</p>
 					</header>
 
 					<p>Metadata extraction is never been easy. Just install the stand-alone phar file in your server, and run this as a cron job.
 					</p>
 
-					<p>Scalp - a command-line utility can certainly help you out in data-mining and analyzing your digital media files in large-scale. We actually don't recommend this to end-users who has no programming/system administration background since this is a very technical software and is meant to be integrated with larger system (CDN, media publishing sites, subscription-based services like Netflix and alike.)</p>
+					<p>Scalp - a command-line utility can certainly help you out in data-mining and analyzing your digital media files in large-scale. This tool is for developers who wants an easier way to manage massive, unstructured media files and is meant to be integrated with larger system (CDN, media publishing sites, subscription-based services like Netflix and alike.)</p>
 
 					<h3>Features</h3>
 					<ul>
 						<li>&gt; Extract EXIF and other basic metadata information from your media files.</li>
-						<li>&gt; Store the extracted data to ElasticSearch and query it from there</li>
-						<li>&gt; Thumbnail creation and storage to ElasticSearch</li>
+						<li>&gt; Store the extracted data to to multiple backend storage and query it from there</li>
+						<li>&gt; Thumbnail creation</li>
 						<li>&gt; Easily visualize and create Dashboards and reports using Kibana</li>
 					</ul>
 
@@ -111,7 +111,7 @@ scalp -V
 <p>This should output something like</p>
 
 {% highlight bash %}
-Scalp Metadata Extraction Tool by Darwin Biler version v2.0.4
+Scalp Metadata Extraction Tool by Darwin Biler version v2.x.x
 {% endhighlight %}
 
 <p>Congrats! you just had installed Scalp in your computer</p>
@@ -121,67 +121,14 @@ Scalp Metadata Extraction Tool by Darwin Biler version v2.0.4
 <p>To index a set of media files, you just need to place a configuration file in the folder (usually the top folder on where your images/videos is stored) you need to be indexed. The configuration file should be named <b>.env</b> . A sample .env file looks like below:</p>
 
 {% highlight bash %}
-DB_PROTOCOL=http
-DB_HOSTNAME=localhost
-DB_NAME=metadata
-DOC_TYPE=files
-DB_PORT=9200
-DB_USERNAME=null
-DB_PASSWORD=null
-DB_SHARDS=1
-DB_REPLICAS=1
-
 INPUT_FOLDER=./
 OUTPUT_FOLDER=dist
-LOG_FOLDER=./
-
-THUMB_PERCENT_RESIZE=10
 {% endhighlight %}
 
 
 				<p><br/><b>All these configuration options is optional!</b> Yes, you can even just execute scalp without configuration file at all, but that is assuming you are ok with the default values. When you did not specify a certain value, it will use the default value. This are the default values of each setting and its brief description</p>
 
 				<table  class="table">
-					<tr>
-						<th>Setting</th>
-						<th>Description</th>
-						<th>Default Value</th>
-					</tr>
-					<tr>
-						<td>DB_HOSTNAME</td>
-						<td>database hostname for the ElasticSearch Server</td>
-						<td>localhost</td>
-					</tr>
-					<tr>
-						<td>DB_NAME</td>
-						<td>index name of the documents in ElasticSearch</td>
-						<td>metadata</td>
-					</tr>
-					<tr>
-						<td>DB_PROTOCOL</td>
-						<td>whether to use SSL or plain http when connecting to ElasticSearch</td>
-						<td>http</td>
-					</tr>
-					<tr>
-						<td>DOC_TYPE</td>
-						<td>the document type in ElasticSearch to store into</td>
-						<td>files</td>
-					</tr>
-					<tr>
-						<td>DB_PORT</td>
-						<td>port number for ElasticSearch</td>
-						<td>9200</td>
-					</tr>
-					<tr>
-						<td>DB_USER</td>
-						<td>username to use to connect to ElasticSearch</td>
-						<td>null</td>
-					</tr>
-					<tr>
-						<td>DB_PASSWORD</td>
-						<td>password to use to connect to ElasticSearch</td>
-						<td>null</td>
-					</tr>
 					<tr>
 						<td>INPUT_FOLDER</td>
 						<td>path to folder you want to extract information from</td>
@@ -191,11 +138,6 @@ THUMB_PERCENT_RESIZE=10
 						<td>OUTPUT_FOLDER</td>
 						<td>where to write json data and thumbnails</td>
 						<td>./dist (this will be created automatically)</td>
-					</tr>
-					<tr>
-						<td>LOG_FOLDER</td>
-						<td>where to write the log file, this is the log file generated by ElasticSearch client. Useful in debugging</td>
-						<td>current folder, you usually would like to set it to /var/log/scalp</td>
 					</tr>
 					<tr>
 						<td>THUMB_PERCENT_RESIZE</td>
@@ -208,7 +150,7 @@ THUMB_PERCENT_RESIZE=10
 					
 
 
-					<h3 id="indexing">Indexing Files</h3>
+					<h3 id="indexing">Indexing Files to ElasticSeach</h3>
 
 					<p>An Index in ElasticSearch is the equivalent of database in RDBMS like MySQL or SQL Server. The indexing process means extracting the metadata information of your media files and store it to an Index in ElasticSearch.</p>
 

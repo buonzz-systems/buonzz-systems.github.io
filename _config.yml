@@ -3,7 +3,7 @@ title: Buonzz Systems
 email: buonzz@gmail.com
 description: High Quality Open Source Applications.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://www.buonzz.com" # the base hostname & protocol for your site
+url: "https://www.buonzz.com" # the base hostname & protocol for your site
 twitter_username: buonzz
 github_username:  buonzz-systems
 
@@ -12,4 +12,4 @@ markdown: kramdown
 permalink: /:title/
 paginate: 5
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-gems: [jekyll-paginate, jekyll-seo-tag]
+plugins: [jekyll-paginate]

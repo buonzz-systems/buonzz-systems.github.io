@@ -1,0 +1,118 @@
+---
+layout: left-sidebar
+title: Philippines Locations API
+---
+
+<style>
+	.table td, .table th{
+		text-align: left;
+		border:1px solid #f3f3f3;
+		padding:1px;
+	}
+	.table th{
+		font-weight: bold;
+	}
+</style>
+<div class="container" id="main">
+	<div class="row 150%">
+		<div class="4u 12u(narrower)">
+
+			<!-- Sidebar -->
+				<section id="sidebar">
+					<section>
+						<header>
+							<h3>What is Philippines Locations API?</h3>
+						</header>
+                        <p> a public API that allows you to list regions, provinces, cities and barangays in Philippines. 
+                            For example, if you want to display a dropdown of cities in your website, instead of storing all city data in your own database
+                            you could simply call this API instead.
+                        </p>
+					</section>
+					<section>
+						<header>
+							<h3>Do you find this tool useful?</h3>
+						</header>
+						<p>
+						We offer this tool for free w/o any restrictions. You can help us maintain this project by providing us support, rest assured that every penny you had donated is worth it.
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="JALX28UNSUPPG">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						</form>
+						.</p>
+					</section>
+				</section>
+
+		</div>
+		<div class="8u 12u(narrower) important(narrower)">
+
+			<!-- Content -->
+				<article id="content">
+					<header>
+						<h2>Overview</h2>
+						<p style="padding-bottom:0px;padding-top:0px;margin-bottom:0px;">Your app needs to know the list of barangays in a certain city?</p>
+					</header>
+
+                    <p>
+                        If you visit <a href="https://ph-locations-api.buonzz.com/" target="_blank">API</a>
+                        you'll see the following endpoints
+                        <ol>
+                            <li>https://ph-locations-api.buonzz.com/v1/regions</li>
+                            <li>https://ph-locations-api.buonzz.com/v1/provinces</li>
+                            <li>https://ph-locations-api.buonzz.com/v1/cities</li>
+                            <li>https://ph-locations-api.buonzz.com/v1/barangays</li>
+                        </ol>
+
+                        Each represents a collection of resource in a JSON format. Regions are the different regions in the Philippines,
+                        under each region are provinces, cities/municipalies within those provinces, then the barangays under those cities/municipalities .
+
+                    </p>
+
+                    <p>The <b>id</b> associated to each of the JSON object are ID's assigned by (PSGC) Philippine Standard Geographic Codes.</p>
+
+                    <p>You can try out using the API via <a href="https://ph-locations-api.buonzz.com/docs/" target="_blank">Swagger documentation</a> included with it</p>
+
+				</article>
+
+		</div>
+	</div>
+	<div class="row features">
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper first">
+				<a href="#" class="image featured"><img src="/images/onetimeonly-1.png" alt="One time only" /></a>
+			</div>
+			<header>
+				<h3>OnetimeOnly</h3>
+			</header>
+			<p>A Java-based web application for securely sharing confidential information via one-time visit links.</p>
+			<ul class="actions">
+				<li><a href="http://secure-reaches-25179.herokuapp.com/" class="button">View Demo</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="/images/best-practices-2.png" alt="Laravel Best Practices" /></a>
+			</div>
+			<header>
+				<h3>Laravel Best Practices</h3>
+			</header>
+			<p>A curated list of best practices in writing, maintaining and deploying Laravel applications.</p>
+			<ul class="actions">
+				<li><a href="http://www.laravelbestpractices.com/" class="button">Visit Site</a></li>
+			</ul>
+		</section>
+		<section class="4u 12u(narrower) feature">
+			<div class="image-wrapper">
+				<a href="#" class="image featured"><img src="/images/restler-boot-1.png" alt="" /></a>
+			</div>
+			<header>
+				<h3>Restler Boot</h3>
+			</header>
+			<p>A Micro-framework for building Microservices.</p>
+			<ul class="actions">
+				<li><a href="/products/restler-boot/" class="button">View Project</a></li>
+			</ul>
+		</section>
+	</div>
+</div>
